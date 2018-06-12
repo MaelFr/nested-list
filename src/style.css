@@ -1,0 +1,77 @@
+* {
+  box-sizing: border-box;
+}
+
+ul {
+  padding-left: 20px;
+  list-style: none;
+}
+
+/* NestedList */
+.nested-list-wrapper {
+  border: 1px solid green;
+}
+.nested-list-wrapper > ul {
+  padding-left: 0;
+}
+.nested-list-content {
+  max-height: 600px;
+  overflow-y: auto;
+  margin: 0;
+}
+
+/* RecursiveList */
+.recursive-list {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+}
+.recursive-list .toggle-hide {
+  background-color: transparent;
+  border: none;
+}
+.recursive-list .toggle-hide.show::before {
+  content: '\2BC8';
+}
+.recursive-list .toggle-hide.hide::before {
+  content: '\2BC6';
+}
+.recursive-list ul {
+  width: 100%;
+}
+
+/* LineContent */
+.list-line {
+  flex: 1 1 auto;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+/* TitleLine */
+.list-title-line {
+  font-weight: bold;
+  text-align: center;
+}
+.list-title-line .my-line-label,
+.list-title-line .my-line-value {
+  text-align: center;
+}
+
+/***********/
+
+/* My Line */
+.my-line-label {
+  flex: 1 1 auto;
+  text-align: left;
+}
+.my-line-value {
+  flex: 0 0 6em;
+  text-align: right;
+}
+.my-line-value input {
+  width: 100%;
+  text-align: right;
+}
+.my-line-actions {
+  flex: 0 0 3em;
+}
