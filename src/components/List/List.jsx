@@ -1,11 +1,29 @@
 import React from 'react';
 
-const List = ({ data, children }) =>
-  data ? <ul>{data.map(item => <li>{React.cloneElement(children, { ...item })}</li>)}</ul> : 'No element';
+class List extends React.Component {
+  state = {
+    scrollBarWidth: 0,
+  };
 
-List.defaultProps = {
-  data: null,
-  children: () => {},
-};
+  handleScrollBarWidthChange = value => {
+    this.setState({ scrollBarWidth: value });
+  };
+
+  render() {
+    const { children } = this.props;
+
+    return (
+      <div className="list">
+        {React.Children.map(children, child =>
+          React.cloneElement(child, {
+            scrollBarWidth: this.state.scrollBarWidth,
+            onSizeChange: this.handleScrollBarWidthChange,
+            root: true,
+          }),
+        )}
+      </div>
+    );
+  }
+}
 
 export default List;

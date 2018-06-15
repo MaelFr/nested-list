@@ -2,75 +2,116 @@
   box-sizing: border-box;
 }
 
-ul {
-  padding-left: 20px;
-  list-style: none;
-}
-
-/* NestedList */
-.nested-list-wrapper {
-  border: 1px solid green;
-}
-.nested-list-wrapper > ul {
+/* List */
+.list > .list-content {
+  max-height: 600px;
+  overflow-y: scroll;
+  border: 1px solid #aaa;
+  border-top: none;
+  border-bottom: none;
   padding-left: 0;
 }
-.nested-list-content {
-  max-height: 600px;
-  overflow-y: auto;
-  margin: 0;
-}
-
-/* RecursiveList */
-.recursive-list {
-  width: 100%;
-  display: flex;
-  flex-flow: row wrap;
-}
-.recursive-list .toggle-hide {
-  background-color: transparent;
-  border: none;
-}
-.recursive-list .toggle-hide.show::before {
-  content: '\2BC8';
-}
-.recursive-list .toggle-hide.hide::before {
-  content: '\2BC6';
-}
-.recursive-list ul {
-  width: 100%;
-}
-
-/* LineContent */
-.list-line {
+/* List Header */
+.list-header {
   flex: 1 1 auto;
   display: flex;
   flex-flow: row nowrap;
-}
-
-/* TitleLine */
-.list-title-line {
   font-weight: bold;
   text-align: center;
+  border: 1px solid #aaa;
+  background-color: #eee;
+  line-height: 2em;
 }
-.list-title-line .my-line-label,
-.list-title-line .my-line-value {
+/* List Content */
+.list-content {
+  list-style: none;
+  padding-left: 20px;
+  margin: 0;
+  width: 100%;
+}
+/* List Item */
+.list-item {
+  flex: 1 1 auto;
+  display: flex;
+  flex-flow: row nowrap;
+  line-height: 1.3em;
+}
+/* List Item Recursive */
+.list-item-recursive .item-content {
+  flex: 1 1 auto;
+  display: flex;
+  flex-flow: row nowrap;
+  line-height: 1.3em;
+}
+.list-item-recursive .toggle-hide {
+  background-color: transparent;
+  border: none;
+  width: 20px;
+}
+.list-item-recursive .toggle-hide.show::before {
+  content: '\25B8';
+}
+.list-item-recursive .toggle-hide.hide::before {
+  content: '\25BE';
+}
+.item-leaf {
+  padding-left: 20px;
+}
+/* List Footer */
+.list-footer {
+  flex: 1 1 auto;
+  display: flex;
+  flex-flow: row nowrap;
+  font-weight: bold;
   text-align: center;
+  border: 1px solid #aaa;
+  background-color: #eee;
+  line-height: 2em;
 }
 
 /***********/
+
+/* My app */
+.list-header .my-line-label,
+.list-header .my-line-value {
+  text-align: center;
+}
+
+.list-footer .my-line-label {
+  text-align: right;
+}
+
+.list-header div {
+  border-right: 1px solid #ccc;
+}
+.list-item div,
+.item-content div {
+  border-right: 1px solid #ccc;
+}
 
 /* My Line */
 .my-line-label {
   flex: 1 1 auto;
   text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .my-line-value {
   flex: 0 0 6em;
   text-align: right;
 }
+.my-line-value span {
+  padding: 0 5px;
+  line-height: 20px;
+}
 .my-line-value input {
   width: 100%;
   text-align: right;
+  font-size: 1em;
+}
+.my-line-value input[type='number'] {
+  height: 100%;
 }
 .my-line-actions {
   flex: 0 0 3em;

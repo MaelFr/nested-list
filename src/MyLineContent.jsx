@@ -1,13 +1,25 @@
 import React from 'react';
 import { grow } from './shared';
+import { TempNumberField } from './components/Form';
 
 class MyLineContent extends React.Component {
+  state = {
+    readOnly: true,
+  };
+
   shouldComponentUpdate(nextProps) {
-    return this.props.line.acc !== nextProps.line.acc || this.props.line.dem !== nextProps.line.dem;
+    return this.props.item.acc !== nextProps.item.acc || this.props.item.dem !== nextProps.item.dem;
   }
 
+  isControlled = field => this.props[field] !== undefined;
+
+  getState = () => ({
+    readOnly: this.isControlled('readOnly') ? this.props.readOnly : this.state.readOnly,
+  });
+
   render() {
-    const { line: { id, label, dem, acc, children }, readonly, handleValueChange } = this.props;
+    const { readOnly } = this.getState();
+    const { item: { id, label, dem, acc, children }, handleValueChange } = this.props;
 
     return (
       <React.Fragment>
@@ -16,11 +28,10 @@ class MyLineContent extends React.Component {
         </div>
 
         <div className="my-line-value">
-          {readonly || children.length ? (
-            grow(dem)
+          {readOnly || children.length ? (
+            <span>{grow(dem)}</span>
           ) : (
-            <input
-              //type="number"
+            <TempNumberField
               value={dem}
               name="dem"
               onChange={e => {
@@ -31,11 +42,10 @@ class MyLineContent extends React.Component {
         </div>
 
         <div className="my-line-value">
-          {readonly || children.length ? (
-            grow(acc)
+          {readOnly || children.length ? (
+            <span>{grow(acc)}</span>
           ) : (
-            <input
-              //type="number"
+            <TempNumberField
               value={acc}
               name="acc"
               onChange={e => {
@@ -52,7 +62,7 @@ class MyLineContent extends React.Component {
 }
 
 MyLineContent.defaultProps = {
-  line: {
+  item: {
     label: 'Libellé',
     dem: 'dem',
     acc: 'acc',
